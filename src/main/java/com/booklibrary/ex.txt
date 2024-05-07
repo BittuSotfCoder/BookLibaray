@@ -1,0 +1,112 @@
+package com.booklibrary;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+
+public class Dash extends JPanel{
+   private JButton pro;
+   ImageIcon icon;
+JFileChooser fileChooser;
+    public Dash(){
+        int  y =(Toolkit.getDefaultToolkit().getScreenSize().height-getHeight());
+            int  x =(Toolkit.getDefaultToolkit().getScreenSize().width-getWidth());
+        setBounds(550,0,x,y);
+        setBackground(Color.decode("#C8BFE7"));
+        setLayout(null);
+        JLabel label=new JLabel("Welcome,");
+        label.setBounds(200, 250, 300, 100);
+        label.setForeground(Color.decode("#851947"));
+        label.setFont( new Font("Algerian", Font.PLAIN, 50));
+        add(label);
+        
+        JLabel label1=new JLabel(Login_Signup.User_name);
+        label1.setBounds(400, 310, 300, 100);
+        label1.setForeground(Color.decode("#0024FF"));
+        label1.setFont( new Font("Arial", Font.PLAIN, 30));
+        add(label1);
+
+        JButton Ab=new JButton("About Us");
+        Ab.setBounds(400, 600, 140, 30);
+        Ab.setFont(new Font("Arial", Font.BOLD, 20));
+        add(Ab);
+         JTextArea tArea=new JTextArea();
+        tArea.setBounds(200, 400, 700, 350);
+        tArea.setText(" If you are referring to a specific library, such as a public or university library, it would be best to visit their official website or contact them directly for information about their services and history."+
+" \n\n\t\tIf \"library\" refers to a software library or code repository, I would need more context or a specific name to provide relevant information.");
+        tArea.setFont(new Font("arial", Font.BOLD, 20));
+        tArea.setLineWrap(true);
+        add(tArea);
+        tArea.setWrapStyleWord(true);
+        tArea.setLineWrap(true);
+        tArea.setBackground(Color.decode("#C8BFE7"));
+        Ab.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
+        
+        JButton logout=new JButton("Logout");
+        logout.setBounds(1110, 240, 100, 30);
+        logout.setFont(new Font("Arial", Font.BOLD, 15));
+        add(logout);
+        logout.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
+                logout.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Login_Signup.bk.removeAll();
+                        Login_Signup.bk.add(Login_Signup.heading);
+                        Login_Signup.bk.add(Login_Signup.jPanel);
+                        Login_Signup.bk.repaint();
+                       Login_Signup.bk.revalidate();
+                     
+                    }
+                    
+                });
+
+        Image pro_file=icon.getImage().getScaledInstance(120, 120, Image.SCALE_AREA_AVERAGING);
+        ImageIcon proFile=new ImageIcon(pro_file);        
+         pro=new JButton(proFile);
+        pro.setBounds(1100, 100, 120, 120);
+        add(pro);
+        fileChooser =new JFileChooser();
+        fileChooser.setMultiSelectionEnabled(true);
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter=new FileNameExtensionFilter("Onle jpg", "jpg");
+        FileNameExtensionFilter filter1=new FileNameExtensionFilter("Onle png", "png");
+        fileChooser.addChoosableFileFilter(filter);
+        fileChooser.addChoosableFileFilter(filter1);
+        pro.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 int seletect=fileChooser.showSaveDialog(null);
+                 if(seletect==JFileChooser.APPROVE_OPTION){
+                    icon=new ImageIcon(fileChooser.getSelectedFile().getAbsolutePath());
+
+                 }
+                 else{
+                    System.out.println("cancel");
+                 }
+
+            }
+            
+        });
+
+
+
+
+
+
+    }
+
+    
+
+}
